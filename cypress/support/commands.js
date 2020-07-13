@@ -16,6 +16,12 @@ Cypress.Commands.add('upload_file', (fileName, fileType = ' ', selector) => {
     })
   });
 
+  Cypress.Commands.add('preencher_campos', (seletor_botao, fileName, fileType = '', seletor_imagem) => {
+    cy.get(seletor_botao).each(($el, index, $list) => {
+      cy.upload_file(fileName, fileType, seletor_imagem);
+    })
+  })
+
 //preenchimento dos dados
 Cypress.Commands.add('preencher_dados_pessoais', (nome,email,cpf,telefone,dataNascimento,carteirinha,seletor,senha) => {
     cy.get('#nome').type(nome)

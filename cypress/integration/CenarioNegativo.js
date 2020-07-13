@@ -8,6 +8,9 @@ describe('Cadastro de paciente com plano de saúde', () => {
         //entra no site
         cy.visit('https://www.psicologiaviva.com.br/')
 
+        cy.title('Consulte com um psicólogo online de qualquer lugar - Psicologia Viva')
+
+
         //clica em 'Cadastrar'
         cy.get(':nth-child(7) > .ancora').click()   
 
@@ -26,17 +29,24 @@ describe('Cadastro de paciente com plano de saúde', () => {
         cy.preencher_campos('#file-upload-btn-3','imagem3.png', fileType, 'input#fotoCarteirinha')
         cy.preencher_campos('#file-upload-btn-4','imagem4.png', fileType, 'input#fotoEncaminhamento')
 
+       
         //ao final dos uploads, seleciona o botão próximo
         cy.get('#nextBtn').click()
 
-        //realiza o preenchimento de todos os campos dos dados pessoais
-        cy.preencher_dados_pessoais('Carlos Silva', 'carloss@gmail.com','77726771380', '31900748585', '2010-02-15','43695536','[for="opt-masculino"]', 'AB7485213') 
+        //realiza o preenchimento de todos os campos dos dados pessoais, exceto data de nascimento
+        cy.get('#nome').type('luiza martins')
+        cy.get('#email').type('luizam@gmail.com')
+        cy.get('#cpf').type('44188203617')
+        cy.get('#telefone').type('31900747785')
+        cy.get('#carteirinha').type('574564578')
+        cy.get('[for="opt-feminino"]').click()
+        cy.get('#senha').type('AD102365213') 
         cy.preencher_campos('#file-upload-btn-5','imagem5.png', fileType, 'input#fotoRosto')
        
-        //finaliza o cadastro e verifica se foi realizado com sucesso
+        //finaliza o cadastro e verifica se a mensagem de cadastro realizado com sucesso não foi exibida
         cy.get('#btnSend').click()
-        cy.get('.swal-title').should('contain', 'Cadastro realizado com sucesso!')     
-        cy.get('.swal-button').click()
+        cy.get('.swal-title').should('not.exist')   
+        cy.visit('https://www.psicologiaviva.com.br/')     
     
     })
 })

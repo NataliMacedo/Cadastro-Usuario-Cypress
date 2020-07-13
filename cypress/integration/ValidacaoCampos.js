@@ -22,45 +22,39 @@ describe('Validação dos campos', () => {
             const fileType = 'Octet string';
 
             it('validação de todos os campos', () => {
-                cy.get('#nextBtn').click()
-                cy.get('.swal-title').should('contain', 'Favor anexar os documentos!')     
-                cy.get('.swal-button').click()
+                cy.finalizar_cadastro('#nextBtn','Favor anexar os documentos!') 
             })
             
             it('validação do primeiro documento', () => {            
                 cy.preencher_campos('#file-upload-btn-2','imagem2.png', fileType, 'input#fotoDocVerso')
                 cy.preencher_campos('#file-upload-btn-3','imagem3.png', fileType, 'input#fotoCarteirinha')
                 cy.preencher_campos('#file-upload-btn-4','imagem4.png', fileType, 'input#fotoEncaminhamento')
-                cy.get('#nextBtn').click()
-                cy.get('.swal-title').should('contain', 'Favor anexar os documentos!')     
-                cy.get('.swal-button').click()
+                cy.finalizar_cadastro('#nextBtn','Favor anexar os documentos!') 
+
             })
                     
             it('validação do segundo documento', () => {
                 cy.preencher_campos('#file-upload-btn','imagem1.png', fileType, 'input#fotoDocFrente')
                 cy.preencher_campos('#file-upload-btn-3','imagem3.png', fileType, 'input#fotoCarteirinha')
                 cy.preencher_campos('#file-upload-btn-4','imagem4.png', fileType, 'input#fotoEncaminhamento')
-                cy.get('#nextBtn').click()
-                cy.get('.swal-title').should('contain', 'Favor anexar os documentos!')     
-                cy.get('.swal-button').click()
+                cy.finalizar_cadastro('#nextBtn','Favor anexar os documentos!') 
+
             })
 
             it('validação do terceiro documento', () => {
                 cy.preencher_campos('#file-upload-btn','imagem1.png', fileType, 'input#fotoDocFrente')
                 cy.preencher_campos('#file-upload-btn-2','imagem2.png', fileType, 'input#fotoDocVerso')
                 cy.preencher_campos('#file-upload-btn-4','imagem4.png', fileType, 'input#fotoEncaminhamento')
-                cy.get('#nextBtn').click()
-                cy.get('.swal-title').should('contain', 'Favor anexar os documentos!')     
-                cy.get('.swal-button').click()
+                cy.finalizar_cadastro('#nextBtn','Favor anexar os documentos!') 
+
             })
 
             it('validação do quarto documento', () => {
                 cy.preencher_campos('#file-upload-btn','imagem1.png', fileType, 'input#fotoDocFrente')
                 cy.preencher_campos('#file-upload-btn-2','imagem2.png', fileType, 'input#fotoDocVerso')
                 cy.preencher_campos('#file-upload-btn-3','imagem3.png', fileType, 'input#fotoCarteirinha')
-                cy.get('#nextBtn').click()
-                cy.get('.swal-title').should('contain', 'Favor anexar os documentos!')     
-                cy.get('.swal-button').click()
+                cy.finalizar_cadastro('#nextBtn','Favor anexar os documentos!') 
+
             })
         })
         
@@ -77,76 +71,73 @@ describe('Validação dos campos', () => {
             })
 
             it('validação do campo nome', () => {
-                cy.get('#email').type('pedross@gmail.com')
-                cy.get('#cpf').type('09922236605')
-                cy.get('#telefone').type('3125478963')
-                cy.get('#dataNascimento').type('2000-04-07')
-                cy.get('#carteirinha').type('968574125')
-                cy.get('#senha').type('es254178') 
-                cy.get('#btnSend').click()
-                cy.get('.swal-title').should('contain', 'Nome é obrigatório!') 
-                cy.get('.swal-button').click() 
+                cy.preencher_dados_pessoais('{home}','pedross@gmail.com','09922236605','31900747785','574564578','as12345')
+                cy.get('#dataNascimento').type('1995-05-07')
+                cy.finalizar_cadastro('#btnSend','Nome é obrigatório!')    
             })
 
             it('validação do campo email', () => {
-                cy.get('#nome').type('pedro silva')
-                cy.get('#cpf').type('09922236605')
-                cy.get('#telefone').type('3125478963')
-                cy.get('#dataNascimento').type('2000-04-07')
-                cy.get('#carteirinha').type('968574125')
-                cy.get('#senha').type('es254178') 
-                cy.get('#btnSend').click()
-                cy.get('.swal-title').should('contain', 'Email é obrigatório!') 
-                cy.get('.swal-button').click()
+                cy.preencher_dados_pessoais('pedro silva','{home}','09922236605','31900747785','574564578','as12345')
+                cy.get('#dataNascimento').type('1995-05-07')
+                cy.finalizar_cadastro('#btnSend','Email é obrigatório!')
             })
 
             it('validação do campo cpf', () => {
-                cy.get('#nome').type('pedro silva')
-                cy.get('#email').type('pedross@gmail.com')
-                cy.get('#telefone').type('3125478963')
-                cy.get('#dataNascimento').type('2000-04-07')
-                cy.get('#carteirinha').type('968574125')
-                cy.get('#senha').type('es254178') 
-                cy.get('#btnSend').click()
-                cy.get('.swal-title').should('contain', 'Número de CPF é obrigatório!') 
-                cy.get('.swal-button').click()
+                cy.preencher_dados_pessoais('pedro silva','pedross@gmail.com','{home}','31900747785','574564578','as12345')
+                cy.get('#dataNascimento').type('1995-05-07')
+                cy.finalizar_cadastro('#btnSend','Número de CPF é obrigatório!')
             })
 
             it('validação do campo telefone', () => {
-                cy.get('#nome').type('pedro silva')
-                cy.get('#email').type('pedross@gmail.com')
-                cy.get('#cpf').type('09922236605')
-                cy.get('#dataNascimento').type('2000-04-07')
-                cy.get('#carteirinha').type('968574125')
-                cy.get('#senha').type('es254178') 
-                cy.get('#btnSend').click()
-                cy.get('.swal-title').should('contain', 'Telefone é obrigatório!') 
-                cy.get('.swal-button').click()
+                cy.preencher_dados_pessoais('pedro silva','pedross@gmail.com','09922236605','{home}','574564578','as12345')
+                cy.get('#dataNascimento').type('1995-05-07')
+                cy.finalizar_cadastro('#btnSend','Telefone é obrigatório!')
             })
 
             it('validação do campo data de nascimento', () => {
-                cy.get('#nome').type('pedro silva')
-                cy.get('#email').type('pedross@gmail.com')
-                cy.get('#telefone').type('3125478963')
-                cy.get('#cpf').type('09922236605')
-                cy.get('#carteirinha').type('968574125')
-                cy.get('#senha').type('es254178') 
-                cy.get('#btnSend').click()
+                cy.preencher_dados_pessoais('pedro silva','pedross@gmail.com','09922236605','31900747785','574564578','as12345')
             })
 
             it('validação do campo carteirinha', () => {
-                cy.get('#nome').type('pedro silva')
-                cy.get('#email').type('pedross@gmail.com')
-                cy.get('#telefone').type('3125478963')
-                cy.get('#cpf').type('09922236605')
-                cy.get('#dataNascimento').type('2000-04-07')
-                cy.get('#senha').type('es254178') 
-                cy.get('#btnSend').click()
-                cy.get('.swal-title').should('contain', 'Número de carteirinha é obrigatório!') 
-                cy.get('.swal-button').click()
+                cy.preencher_dados_pessoais('pedro silva','pedross@gmail.com','09922236605','31900747785','{home}','as12345')
+                cy.get('#dataNascimento').type('1995-05-07')
+                cy.finalizar_cadastro('#btnSend','Número de carteirinha é obrigatório!')
             })
+
+            describe('validação do campo senha', () => {
+
+                it('valida campo vazio', () => {
+                    cy.preencher_dados_pessoais('pedro silva','pedross@gmail.com','09922236605','31900747785','52461389','{home}')
+                    cy.get('#dataNascimento').type('1995-05-07')
+                    cy.finalizar_cadastro('#btnSend','Senha é obrigatório!')
+                })
+                
+                it('valida entrada com menos de 5 caracteres', () => {
+                    cy.preencher_dados_pessoais('pedro silva','pedross@gmail.com','09922236605','31900747785','52461389','e25')
+                    cy.get('#dataNascimento').type('1995-05-07')
+                    cy.finalizar_cadastro('#btnSend', 'Senha não atende aos critérios!')
+                })
+
+                it('valida a necessidade de pelo menos uma letra', () => {
+                    cy.preencher_dados_pessoais('pedro silva','pedross@gmail.com','09922236605','31900747785','52461389','142536987')
+                    cy.get('#dataNascimento').type('1995-05-07')
+                    cy.finalizar_cadastro('#btnSend', 'Senha não atende aos critérios!')
+                })
+
+                it('valida a necessidade de pelo menos um número', () => {
+                cy.preencher_dados_pessoais('pedro silva','pedross@gmail.com','09922236605','31900747785','52461389','epoytesp')
+                cy.get('#dataNascimento').type('1995-05-07')
+                cy.finalizar_cadastro('#btnSend', 'Senha não atende aos critérios!')
+            }) 
             
         })
+    })
+
+    it('validação do cadastro sem preenchimento de campos opcionais', () => {
+        cy.preencher_dados_pessoais('pedro silva','pedross@gmail.com','09922236605','31900747785','968574125','as12345')
+        cy.get('#dataNascimento').type('1995-05-07')
+        cy.finalizar_cadastro('#btnSend','Cadastro realizado com sucesso!')
+    })
     
 })
  

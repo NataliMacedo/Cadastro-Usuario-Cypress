@@ -34,13 +34,8 @@ describe('Cadastro de paciente com plano de saúde', () => {
         cy.get('#nextBtn').click()
 
         //realiza o preenchimento de todos os campos dos dados pessoais, exceto data de nascimento
-        cy.get('#nome').type('luiza martins')
-        cy.get('#email').type('luizam@gmail.com')
-        cy.get('#cpf').type('44188203617')
-        cy.get('#telefone').type('31900747785')
-        cy.get('#carteirinha').type('574564578')
+        cy.preencher_dados_pessoais('luiza martins','luizam@gmail.com','09922236605','31900747785','574564578', 'as12345')     
         cy.get('[for="opt-feminino"]').click()
-        cy.get('#senha').type('AD102365213') 
         cy.preencher_campos('#file-upload-btn-5','imagem5.png', fileType, 'input#fotoRosto')
        
         //finaliza o cadastro e verifica se a mensagem de cadastro realizado com sucesso não foi exibida

@@ -23,14 +23,18 @@ Cypress.Commands.add('upload_file', (fileName, fileType = ' ', selector) => {
   })
 
 //preenchimento dos dados
-Cypress.Commands.add('preencher_dados_pessoais', (nome,email,cpf,telefone,dataNascimento,carteirinha,seletor,senha) => {
+Cypress.Commands.add('preencher_dados_pessoais', (nome,email,cpf,telefone,carteirinha,senha) => {
     cy.get('#nome').type(nome)
     cy.get('#email').type(email)
     cy.get('#cpf').type(cpf)
     cy.get('#telefone').type(telefone)
-    cy.get('#dataNascimento').type(dataNascimento)
     cy.get('#carteirinha').type(carteirinha)
-    cy.get(seletor).click()
     cy.get('#senha').type(senha) 
     
+})
+
+Cypress.Commands.add('finalizar_cadastro', (seletor, msg) => {
+    cy.get(seletor).click()
+    cy.get('.swal-title').should('contain', msg) 
+    cy.get('.swal-button').click()
 })

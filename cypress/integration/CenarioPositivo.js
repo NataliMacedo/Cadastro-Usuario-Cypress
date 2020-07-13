@@ -30,13 +30,13 @@ describe('Cadastro de paciente com plano de saúde', () => {
         cy.get('#nextBtn').click()
 
         //realiza o preenchimento de todos os campos dos dados pessoais
-        cy.preencher_dados_pessoais('Carlos Silva', 'carloss@gmail.com','77726771380', '31900748585', '2010-02-15','43695536','[for="opt-masculino"]', 'AB7485213') 
+        cy.preencher_dados_pessoais('Carla Silveira', 'carlas@gmail.com','09922236605', '31900748585', '43695536','AB7481113') 
+        cy.get('#dataNascimento').type('2010-02-15')
+        cy.get('[for="opt-feminino"]').click()
         cy.preencher_campos('#file-upload-btn-5','imagem5.png', fileType, 'input#fotoRosto')
        
         //finaliza o cadastro e verifica se foi realizado com sucesso
-        cy.get('#btnSend').click()
-        cy.get('.swal-title').should('contain', 'Cadastro realizado com sucesso!')     
-        cy.get('.swal-button').click()
+        cy.finalizar_cadastro('#btnSend','Cadastro realizado com sucesso!')
     
     })
 })
